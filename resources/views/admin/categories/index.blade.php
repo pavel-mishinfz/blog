@@ -35,7 +35,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Название</th>
-                                        <th>Действия</th>
+                                        <th colspan="3" class="text-center">Действия</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -43,10 +43,26 @@
                                         <tr>
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->title }}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="{{ route('admin.category.show', $category->id) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('admin.category.edit', $category->id) }}"
+                                                   class="text-success">
+                                                    <i class="fa fa-pencil-alt"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <form action="{{ route('admin.category.delete', $category->id) }}"
+                                                     method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <i class="fa fa-trash text-danger"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
