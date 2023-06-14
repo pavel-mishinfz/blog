@@ -52,6 +52,9 @@
                                         <label class="custom-file-label">Выберите изображение</label>
                                     </div>
                                 </div>
+                                @error('preview_image')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Добавить главное изображение</label>
@@ -62,6 +65,19 @@
                                         <label class="custom-file-label">Выберите изображение</label>
                                     </div>
                                 </div>
+                                @error('main_image')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Выберите категорию</label>
+                                <select name="category_id" class="form-control">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                        {{ $category->id == old('category_id') ? ' selected' : '' }}
+                                        >{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Добавить">
