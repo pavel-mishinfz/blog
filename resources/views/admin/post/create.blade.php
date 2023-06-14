@@ -25,16 +25,47 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.post.store') }}" method="post" class="w-25">
+                        <form action="{{ route('admin.post.store') }}" method="post" class="w-50"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>Название</label>
-                                <input name="title" type="text" class="form-control" placeholder="Название поста">
+                                <input name="title" type="text" class="form-control" placeholder="Название поста"
+                                value="{{old('title')}}">
                                 @error('title')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <input type="submit" class="btn btn-primary" value="Добавить">
+                            <div class="form-group">
+                                <label>Описание</label>
+                                <textarea id="summernote" name="content">{{old('content')}}</textarea>
+                                @error('content')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Добавить превью</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="preview_image"
+                                               accept="image/png, image/jpeg">
+                                        <label class="custom-file-label">Выберите изображение</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Добавить главное изображение</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="main_image"
+                                               accept="image/png, image/jpeg">
+                                        <label class="custom-file-label">Выберите изображение</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Добавить">
+                            </div>
                         </form>
                     </div>
                     <!-- ./col -->
