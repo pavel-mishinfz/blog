@@ -29,14 +29,16 @@
                             @csrf
                             <div class="form-group">
                                 <label>Имя</label>
-                                <input name="name" type="text" class="form-control" placeholder="Имя пользователя">
+                                <input name="name" type="text" class="form-control" placeholder="Имя пользователя"
+                                value="{{ old('name') }}">
                                 @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input name="email" type="text" class="form-control" placeholder="Email">
+                                <input name="email" type="text" class="form-control" placeholder="Email"
+                                value="{{ old('email') }}">
                                 @error('email')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -45,6 +47,19 @@
                                 <label>Пароль</label>
                                 <input name="password" type="text" class="form-control" placeholder="Пароль">
                                 @error('password')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Выберите роль</label>
+                                <select name="role" class="form-control">
+                                    @foreach($roles as $id => $role)
+                                        <option value="{{ $id }}"
+                                                {{ $id == old('role') ? ' selected' : '' }}
+                                        >{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                                @error('role')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
