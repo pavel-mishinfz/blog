@@ -85,6 +85,9 @@
                                         >{{ $category->title }}</option>
                                     @endforeach
                                 </select>
+                                @error('category_id')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Тэги</label>
@@ -96,6 +99,9 @@
                                         >{{ $tag->title }}</option>
                                     @endforeach
                                 </select>
+                                @error('tag_ids')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <input type="submit" class="btn btn-primary" value="Обновить">
                         </form>
