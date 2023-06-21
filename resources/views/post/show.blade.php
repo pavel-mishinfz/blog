@@ -24,21 +24,37 @@
                         <h2 class="section-title mb-4" data-aos="fade-up">Related Posts</h2>
                         <div class="row">
                             @foreach($relatedPosts as $relatedPost)
-                            <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
-                                <img src="{{ asset('storage/' . $relatedPost->preview_image) }}" alt="related post" class="post-thumbnail">
-                                <p class="post-category">{{ $relatedPost->category->title }}</p>
-                                <a href="{{ route('post.show', $relatedPost->id) }}"><h5 class="post-title">{{ $relatedPost->title }}</h5></a>
-                            </div>
+                                <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
+                                    <img src="{{ asset('storage/' . $relatedPost->preview_image) }}" alt="related post"
+                                         class="post-thumbnail">
+                                    <p class="post-category">{{ $relatedPost->category->title }}</p>
+                                    <a href="{{ route('post.show', $relatedPost->id) }}"><h5
+                                                class="post-title">{{ $relatedPost->title }}</h5></a>
+                                </div>
                             @endforeach
                         </div>
                     </section>
+                    <section class="comment-list" style="margin-bottom: 150px;">
+                        <h2 class="section-title mb-5" data-aos="fade-up">Comments ({{ $post->comments->count() }})</h2>
+                        @foreach($post->comments as $comment)
+                            <span class="username">
+                                  <b>{{$comment->user->name}}</b> <span class="text-muted float-right">{{ $comment->dateAsCarbon->diffForHumans() }}</span>
+                            </span><!-- /.username -->
+                            <div class="comment-text mb-3">
+                                {{ $comment->message }}
+                            </div>
+                        @endforeach
+                    </section>
+                    @auth()
                     <section class="comment-section">
                         <h2 class="section-title mb-5" data-aos="fade-up">Leave a Reply</h2>
-                        <form action="/" method="post">
+                        <form action="{{ route('post.comment.store', $post->id) }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-12" data-aos="fade-up">
                                     <label for="comment" class="sr-only">Comment</label>
-                                    <textarea name="message" id="comment" class="form-control" placeholder="Comment" rows="10"></textarea>
+                                    <textarea name="message" id="comment" class="form-control" placeholder="Comment"
+                                              rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -48,6 +64,7 @@
                             </div>
                         </form>
                     </section>
+                    @endauth
                 </div>
             </div>
         </div>

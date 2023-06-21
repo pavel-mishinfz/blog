@@ -45,7 +45,11 @@
                 </ul>
                 <ul class="navbar-nav mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span> Eng</a>
+                        @guest
+                        <a class="nav-link btn btn-outline-success" href="{{ route('personal.main.index') }}">Sign in</a>
+                        @else
+                        <a class="nav-link btn btn-outline-success" href="{{ route('personal.main.index') }}">My account</a>
+                        @endguest
                     </li>
                 </ul>
             </div>
